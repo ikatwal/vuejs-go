@@ -72,8 +72,8 @@ export default {
     
         getData: function() {
             return {
-                "awpRises": parseFloat(this.awpRises), "awpDrops": parseFloat(this.awpDrops), 
-                "wacRises": parseFloat(this.wacRises), "wacDrops": parseFloat(this.wacDrops),
+                "awpRise": parseFloat(this.awpRises), "awpDrop": parseFloat(this.awpDrops), 
+                "wacRise": parseFloat(this.wacRises), "wacDrop": parseFloat(this.wacDrops),
                 "newDrug": this.newDrug, "drugType": this.drugType, "orangeBook": this.orangeBook,
                 "obsoleteDrug": this.obsoleteDrug
             }

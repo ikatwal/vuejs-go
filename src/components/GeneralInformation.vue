@@ -121,8 +121,8 @@ export default {
       }
     },
     getData: function() {
-        return {"macListName": this.macListName, "effectiveDate": this.effectiveDate, 
-        "terminationDate": this.terminationDate, "publishToPortal": this.publishToPortal,
+        return {"macListName": this.macListName, "effectiveDate": this.effectiveDate+"T00:00:00Z", 
+        "terminationDate": this.terminationDate+"T00:00:00Z", "publishToPortal": this.publishToPortal,
         "baseMacList": this.baseMacList, "clinicalDataSrc": this.clinicalDataSrc, "useNadac": this.useNadac,
         "nadacMarkup": parseFloat(this.nadacMarkup), "orangeDrug": this.orangeDrug, "obsoleteDrug": this.obsoleteDrug,
         "eliminateSingleSrcBrand": this.eliminateSingleSrcBrand, "setPricing": this.setPricing};

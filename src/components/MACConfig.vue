@@ -79,11 +79,10 @@
                 }
 
                 var data = JSON.stringify(obj1);
-                console.log(data);
-                axios({ method: "POST", url: process.env.VUE_APP_BASE_URL, data: data, headers: {"content-type": "application/json" } }).then(result => { 
-                    console.log(result) 
-                    }).catch( error => {
-                        console.error(error);
+                axios({ method: "POST", url: process.env.VUE_APP_BASE_URL, data: data, headers: {"content-type": "text/plain" } }).then(response => {
+                    console.log(response)
+                }).catch(error => {
+                    console.error(error)
                 });
 
             }
