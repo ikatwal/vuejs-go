@@ -13,8 +13,8 @@
             <span>
                 <b-button @click="created = !created" :disabled="!created">Create New MAC List</b-button>
                 <span class="created-by">Created By: EMartina</span>
-                <span class="created-date">Created Date: 4/1/2020</span>
-                <span class="status">Status: Approved</span>
+                <span class="created-date">Created Date: 4/14/2020</span>
+                <span class="status">Status: Draft</span>
             </span>
             <!-- other components -->
             <div>
@@ -57,8 +57,12 @@
         name: "mac-config",
         data: function() {
             return {
+                 lists: null,
                  created: true
             }
+        },
+        created() {
+            this.fetchData()
         },
         methods: {
             reset() {
@@ -71,20 +75,34 @@
             isCreated(){
                 return this.created;
             },
+            fetchData() {
+                this.lists = null;
+            },
             save() {
                 var obj1 = this.$refs.generalInformation.getData();
+                if (obj1 == null) {
+                    alert('One or more required fields (*) not entered')
+                    return
+                }
                 var obj2 = this.$refs.alerts.getData()
                 for (var key in obj2) {
                     obj1[key] = obj2[key]
                 }
 
-                var data = JSON.stringify(obj1);
-                axios({ method: "POST", url: process.env.VUE_APP_BASE_URL, data: data, headers: {"content-type": "text/plain" } }).then(response => {
+                var data = obj1;
+                console.log(data)
+
+                axios({ method: "POST", url: process.env.VUE_APP_BASE_URL,
+                 data: data, headers: {"content-type": "text/plain" } }).then(response => {
                     console.log(response)
                 }).catch(error => {
                     console.error(error)
                 });
 
+                axios.get('http://127.0.0.1:8081/v1/api/getList').then(response => { console.log(response) })
+
+
+                
             }
         },
         components: {

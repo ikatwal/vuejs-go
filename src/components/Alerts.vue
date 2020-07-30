@@ -96,4 +96,8 @@ export default {
         text-align: left;
     }
 
+    label {
+        padding-right: 5px;
+    }
+
 </style>

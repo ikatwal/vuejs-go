@@ -8,10 +8,10 @@
 
     <!--<input type="text"></p>-->
     <p><label>Effective Date:* </label>
-    <input v-model="effectiveDate" required="required" placeholder="Enter date" type="date">
+    <input v-model="effectiveDate" placeholder="Enter date" type="date">
     </p>
     <p><label>Termination Date: </label><input v-model="terminationDate" type="date"></p>
-    <p><label for="checkbox">Publish to Portal: </label>
+    <p><label for="checkbox">Publish to Portal:</label>
         <input v-model="publishToPortal" type="checkbox" id="checkbox">
     </p>
     <p><label>Base MAC List: </label>
@@ -39,22 +39,22 @@
             <th>MSBG</th>
         </tr>
         <tr>
-            <td>AWP Discount</td>
-            <td>85%</td>
-            <td>80%</td>
-            <td>75%</td>
-            <td>70%</td>
-            <td>70%</td>
-            <td>70%</td>
+            <td>AWP Discount %</td>
+            <td><input class="disc" v-model="awpGen" @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="awpSsg"  @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="awpSsb"  @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="awpSsbg"  @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="awpMsb"   @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="awpMsbg"  @input="onlyNumbers" type="text"></td>
         </tr>
         <tr>
-            <td>WAC Discount</td>
-            <td>80%</td>
-            <td>75%</td>
-            <td>70%</td>
-            <td>80%</td>
-            <td>80%</td>
-            <td>80%</td>
+            <td>WAC Discount %</td>
+            <td><input class="disc" v-model="wacGen" @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="wacSsg" @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="wacSsb" @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="wacSsbg" @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="wacMsb" @input="onlyNumbers" type="text"></td>
+            <td><input class="disc" v-model="wacMsbg" @input="onlyNumbers" type="text"></td>
         </tr>
     </table>
     <p><label for="checkbox">Use NADAC Pricing: </label>
@@ -95,9 +95,11 @@ export default {
     data: function() {
     return {
       macListName:"", effectiveDate:"", terminationDate:"",
-      publishToPortal:false, baseMacList:"", clinicalDataSrc:"",
+      publishToPortal:false, baseMacList:"", clinicalDataSrc:"", status:"Draft",
       useNadac:false, nadacMarkup:0, orangeDrug:false, obsoleteDrug:false,
-      eliminateSingleSrcBrand:false, setPricing:""
+      eliminateSingleSrcBrand:false, setPricing:"", awpGen:0, awpSsb:0,
+      awpMsbg:0, awpMsb:0, awpSsbg:0, awpSsg:0, wacGen:0, wacSsg:0, wacSsb:0,
+      wacSsbg:0, wacMsb:0, wacMsbg:0
     }
   },
   methods: {
@@ -114,23 +116,101 @@ export default {
        this.obsoleteDrug = '';
        this.eliminateSingleSrcBrand = '';
        this.setPricing = '';
+       this.awpGen = ''; 
+       this.awpSsb = '';
+       this.status = 'Draft';
+       this.awpMsbg = ''; 
+       this.awpMsb = ''; 
+       this.awpSsbg = ''; 
+       this.awpSsg = '';
+       this.wacGen = '';
+       this.wacSsg = '';
+       this.wacSsb = '';
+       this.wacSsbg = '';
+       this.wacMsb = '';
+       this.wacMsbg = '';
     },
     onlyNumbers: function() {
-      if (!String(this.nadacMarkup).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+        if (!String(this.nadacMarkup).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
             this.nadacMarkup = '';
-      }
+        }
+
+        if (!String(this.awpGen).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.awpGen = '';
+        }
+
+        if (!String(this.awpSsb).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.awpSsb = '';
+        }
+                
+        if (!String(this.awpMsbg).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.awpMsbg = '';
+        }
+
+        if (!String(this.awpMsb).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.awpMsb = '';
+        }
+
+        if (!String(this.awpSsbg).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.awpSsbg = '';
+        }
+
+        if (!String(this.awpSsg).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.awpSsg = '';
+        }
+
+         if (!String(this.wacGen).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.wacGen = '';
+        }
+
+        if (!String(this.wacSsb).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.wacSsb = '';
+        }
+                
+        if (!String(this.wacMsbg).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.wacMsbg = '';
+        }
+
+        if (!String(this.wacMsb).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.wacMsb = '';
+        }
+
+        if (!String(this.wacSsbg).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.wacSsbg = '';
+        }
+
+        if (!String(this.wacSsg).match(/^(\d{0,2}){1}([.]?\d{0,2})?$/)) {
+            this.wacSsg = '';
+        }
     },
     getData: function() {
-        return {"macListName": this.macListName, "effectiveDate": this.effectiveDate+"T00:00:00Z", 
-        "terminationDate": this.terminationDate+"T00:00:00Z", "publishToPortal": this.publishToPortal,
-        "baseMacList": this.baseMacList, "clinicalDataSrc": this.clinicalDataSrc, "useNadac": this.useNadac,
-        "nadacMarkup": parseFloat(this.nadacMarkup), "orangeDrug": this.orangeDrug, "obsoleteDrug": this.obsoleteDrug,
-        "eliminateSingleSrcBrand": this.eliminateSingleSrcBrand, "setPricing": this.setPricing};
-      /*eslint-disable*/
-      console.log(data);
-      /*eslint-enable*/
-
-
+        //Must validate MAC List name, Effective Date and Clinical Data Source
+        if (this.macListName == '' || this.effectiveDate == '' || this.clinicalDataSrc == ''){
+            return null;
+        }
+        var terminationDate = '';
+        if (this.terminationDate == "") {
+            terminationDate = "";
+        } else {
+            terminationDate = this.terminationDate + "T00:00:00Z";
+        }
+     
+        
+        return {
+            "macListName": this.macListName, "effectiveDate": this.effectiveDate+"T00:00:00Z", 
+            "terminationDate": terminationDate, "publishToPortal": this.publishToPortal,
+            "baseMacList": this.baseMacList, "clinicalDataSrc": this.clinicalDataSrc, "useNadac": this.useNadac,
+            "status": "Draft", "nadacMarkup": parseFloat(this.nadacMarkup), "orangeDrug": this.orangeDrug, 
+            "obsoleteDrug": this.obsoleteDrug, "eliminateSingleSrcBrand": this.eliminateSingleSrcBrand, 
+            "setPricingBy": this.setPricing, "awpDiscountGen":parseFloat(this.awpGen), 
+            "awpDiscountMsb":parseFloat(this.awpMsb), "awpDiscountSsb":parseFloat(this.awpSsb),
+            "awpDiscountMsbg":parseFloat(this.awpMsbg), "awpDiscountSsbg":parseFloat(this.awpSsbg),
+            "awpDiscountSsg":parseFloat(this.awpSsg), "wacGen":parseFloat(this.wacGen), 
+            "wacMsb":parseFloat(this.wacMsb), "wacSsb":parseFloat(this.wacSsb), 
+            "wacMsbg":parseFloat(this.wacMsbg), "wacSsbg":parseFloat(this.wacSsbg), 
+            "wacSsg":parseFloat(this.wacSsg)
+        };
+     
     }
   }
 }
@@ -181,6 +261,16 @@ export default {
         margin: 5px 0 0 0;
     }
 
+    label {
+        padding-right: 5px; 
+    }
+    
+    .disc {
+        width: 100%; 
+        box-sizing: border-box;
+        -webkit-box-sizing:border-box;
+        -moz-box-sizing: border-box;
+    }
     p {
         padding-left: 10px;
         text-align: left;
