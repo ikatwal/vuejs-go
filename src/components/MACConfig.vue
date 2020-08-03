@@ -92,14 +92,7 @@
                 var data = obj1;
                 console.log(data)
 
-                axios({ method: "POST", url: process.env.VUE_APP_BASE_URL,
-                 data: data, headers: {"content-type": "text/plain" } }).then(response => {
-                    console.log(response)
-                }).catch(error => {
-                    console.error(error)
-                });
-
-                axios.get('http://127.0.0.1:8081/v1/api/getList').then(response => { console.log(response) })
+                
 
 
                 
